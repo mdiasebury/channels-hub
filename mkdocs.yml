@@ -34,10 +34,9 @@ nav:
     - Authentication: api-auth.md
   - EBO:
     - Overview: EBO.md
-    - Architecture: EBO-architecture.md
+    - Architecture: Architecture.md
   - Mobile:
     - Overview: Mobile.md
-    - Architecture: Mobile-architecture.md
 
 extra_css:
   - assets/custom.css
