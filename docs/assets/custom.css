@@ -1,0 +1,42 @@
+/* Custom CSS for Channels Hub */
+
+/* Increase logo size */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+    height: 5rem; /* Default is usually 1.2rem, adjust as needed */
+    width: auto;
+}
+
+/* Alternative: If you want to target the logo more specifically */
+.md-logo img {
+    height: 5rem !important;
+    width: auto !important;
+}
+
+/* Hide the site name text */
+.md-header__title {
+    display: none;
+}
+
+/* Move search and theme toggle to the right side - Direct approach */
+.md-header__inner {
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Push search and theme toggle to the right */
+.md-search {
+    margin-left: auto !important;
+    order: 10 !important;
+}
+
+.md-header__option {
+    order: 11 !important;
+    margin-left: 0.5rem !important;
+}
+
+/* Keep logo and title on the left */
+.md-header__button.md-logo,
+.md-header__topic {
+    order: 1 !important;
+}
