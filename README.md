@@ -1,14 +1,11 @@
-# Welcome to Channels Hub
-
-This is the main page for the channels documentation page!
+# Channels Hub Documentation
 
 ## Getting Started
-
 
 ### 1. Clone the Repository
 Clone this repository to your local machine:
 ```bash
-git clone git@github.com:mdiasebury/channels-hub.git
+git clone <repo-url>
 cd channels_page
 ```
 
@@ -61,5 +58,11 @@ nav:
 - Place each `.md` file in the folder that matches its domain (e.g., API docs in `docs/API/`, EBO docs in `docs/EBO/`).
 
 ---
+
+## Summary
+- **Edit `mkdocs.yml`** to add new navigation tabs or sections.
+- **Write your documentation** in markdown files and place them in the correct folder.
+- **Reference each file** in `mkdocs.yml` under the appropriate section.
+- **Run `mkdocs serve`** to preview your changes locally.
 
 For more details, see the [MkDocs Material documentation](https://squidfunk.github.io/mkdocs-material/).
