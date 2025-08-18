@@ -40,7 +40,7 @@ nav:
 
 extra_css:
   - assets/custom.css
-repo_url: https://github.com/mdiasebury/channels-hub
+
 markdown_extensions:
   - attr_list
   - pymdownx.emoji:
