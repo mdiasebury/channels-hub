@@ -18,6 +18,11 @@
     display: none;
 }
 
+/* Hide the direct text content using a pseudo-element technique */
+label.md-nav__title[for="__drawer"] {
+    font-size: 0;
+}
+
 /* Move search and theme toggle to the right side - Direct approach */
 .md-header__inner {
     display: flex !important;
