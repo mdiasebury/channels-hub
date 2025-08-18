@@ -59,10 +59,4 @@ nav:
 
 ---
 
-## Summary
-- **Edit `mkdocs.yml`** to add new navigation tabs or sections.
-- **Write your documentation** in markdown files and place them in the correct folder.
-- **Reference each file** in `mkdocs.yml` under the appropriate section.
-- **Run `mkdocs serve`** to preview your changes locally.
-
 For more details, see the [MkDocs Material documentation](https://squidfunk.github.io/mkdocs-material/).
