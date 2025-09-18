@@ -61,7 +61,4 @@ nav:
 
 For more details, see the [MkDocs Material documentation](https://squidfunk.github.io/mkdocs-material/).
 
-
-
-
-This is just an exaple of adding something to a readme.
+hIIII2222
