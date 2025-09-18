@@ -25,7 +25,6 @@ automations:
       - pr_created
       - commit
     if:
-      - {{ not pr.draft }}
       - {{ not is.bot }}
     run:
       - action: describe-changes@v1
