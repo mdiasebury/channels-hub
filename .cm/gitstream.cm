@@ -9,7 +9,7 @@ automations:
   # Use LinearB's AI service to review the changes
   linearb_ai_review:
     on:
-      - pr_created
+      - pr_description_changed
       - commit
     if:
       - {{ not pr.draft }}
@@ -23,7 +23,7 @@ automations:
   # Use LinearB's AI service to add a description to the PR
   linearb_ai_description:
     on:
-      - pr_created
+      - pr_description_changed
       - commit
     if:
       - {{ not pr.draft }}
