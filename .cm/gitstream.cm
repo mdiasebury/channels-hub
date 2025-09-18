@@ -14,6 +14,7 @@ automations:
     if:
       - {{ not pr.draft }}
       - {{ not is.bot }}
+      - {{ has.gitstream_on }}
     run:
       - action: code-review@v1
         args:
@@ -27,6 +28,7 @@ automations:
     if:
       - {{ not pr.draft }}
       - {{ not is.bot }}
+      - {{ has.gitstream_on }}
     run:
       - action: describe-changes@v1
         args:
@@ -35,7 +37,7 @@ automations:
   # Add a label indicating how long it will take to review the PR.
   estimated_time_to_review:
     if:
-      - true
+      - {{ has.gitstream_on }}
     run:
       - action: add-label@v1
         args:
@@ -55,18 +57,6 @@ automations:
           comment: |
             This PR is missing a Jira ticket reference in the title or description.
             Please add a Jira ticket reference to the title or description of this PR.
-  # Post a comment that lists the best experts for the files that were modified.
-  explain_code_experts:
-    on:
-      - pr_created
-      - pr_ready_for_review
-      - commit
-    if:
-      - true
-    run:
-      - action: explain-code-experts@v1
-        args:
-          gt: 10
 
 
 # +----------------------------------------------------------------------------+
@@ -81,6 +71,7 @@ calc:
 has:
   jira_ticket_in_title: {{ pr.title | includes(regex=r/\b[A-Za-z]+-\d+\b/) }}
   jira_ticket_in_desc: {{ pr.description | includes(regex=r/atlassian.net\/browse\/\w{1,}-\d{3,4}/) }}
+  gitstream_on: {{ pr.description | includes('[gitstream_on]') }}
 
 colors:
   red: 'b60205'
