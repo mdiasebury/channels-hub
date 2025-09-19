@@ -6,29 +6,29 @@ manifest:
 
 
 automations:
-  # Use LinearB's AI service to review the changes
+  # Use LinearB's AI service to review the changes (opt-in via label or keyword)
   linearb_ai_review:
     on:
-      - pr_description_changed
+      - pr_created
       - commit
     if:
       - {{ not pr.draft }}
       - {{ not is.bot }}
-      - {{ has.gitstream_on }}
+      - {{ has.ai_review_requested }}
     run:
       - action: code-review@v1
         args:
           approve_on_LGTM: {{ calc.safe_changes }}
 
-  # Use LinearB's AI service to add a description to the PR
+  # Use LinearB's AI service to add a description to the PR (opt-in via label or keyword)
   linearb_ai_description:
     on:
-      - pr_description_changed
+      - pr_created
       - commit
     if:
       - {{ not pr.draft }}
       - {{ not is.bot }}
-      - {{ has.gitstream_on }}
+      - {{ has.ai_description_requested }}
     run:
       - action: describe-changes@v1
         args:
@@ -37,7 +37,7 @@ automations:
   # Add a label indicating how long it will take to review the PR.
   estimated_time_to_review:
     if:
-      - {{ has.gitstream_on }}
+      - true
     run:
       - action: add-label@v1
         args:
@@ -57,6 +57,38 @@ automations:
           comment: |
             This PR is missing a Jira ticket reference in the title or description.
             Please add a Jira ticket reference to the title or description of this PR.
+  # Post a comment that lists the best experts for the files that were modified.
+  explain_code_experts:
+    on:
+      - pr_created
+      - pr_ready_for_review
+      - commit
+    if:
+      - true
+    run:
+      - action: explain-code-experts@v1
+        args:
+          gt: 10
+
+  # Inform users about optional AI features
+  ai_features_info:
+    on:
+      - pr_created
+    if:
+      - {{ not pr.draft }}
+      - {{ not is.bot }}
+      - {{ not (has.ai_review_requested or has.ai_description_requested) }}
+    run:
+      - action: add-comment@v1
+        args:
+          comment: |
+            🤖 **Optional AI Features Available**
+            
+            You can opt-in to AI-powered features by:
+            - **AI Code Review**: Add the `ai-review` label or include `[ai-review]` in your PR title/description
+            - **AI Description**: Add the `ai-description` label or include `[ai-description]` in your PR title/description
+            
+            These features are optional and will only run when explicitly requested.
 
 
 # +----------------------------------------------------------------------------+
@@ -71,7 +103,8 @@ calc:
 has:
   jira_ticket_in_title: {{ pr.title | includes(regex=r/\b[A-Za-z]+-\d+\b/) }}
   jira_ticket_in_desc: {{ pr.description | includes(regex=r/atlassian.net\/browse\/\w{1,}-\d{3,4}/) }}
-  gitstream_on: {{ pr.description | includes('[gitstream_on]') }}
+  ai_review_requested: {{ pr.labels | match(term='ai-review') | some or pr.title | includes(regex=r/\[ai-review\]/) or pr.description | includes(regex=r/\[ai-review\]/) }}
+  ai_description_requested: {{ pr.labels | match(term='ai-description') | some or pr.title | includes(regex=r/\[ai-description\]/) or pr.description | includes(regex=r/\[ai-description\]/) }}
 
 colors:
   red: 'b60205'
