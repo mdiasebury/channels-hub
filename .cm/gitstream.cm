@@ -29,19 +29,6 @@ automations:
           comment: |
             This PR is missing a Jira ticket reference in the title or description.
             Please add a Jira ticket reference to the title or description of this PR.
-  # Custom command: /approve - Auto-approve PR if safe changes
-  custom_approve_command:
-    on:
-      - comment_added
-    if:
-      - {{ pr.comments | match(attr='content', regex=r'^/approve$') | some }}
-      - {{ calc.safe_changes }}
-    run:
-      - action: approve@v1
-      - action: add-comment@v1
-        args:
-          comment: |
-            ✅ PR auto-approved via `/approve` command (safe changes detected)
 
 
 # +----------------------------------------------------------------------------+
