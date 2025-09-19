@@ -1,6 +1,15 @@
 # -*- mode: yaml -*-
 # This example configuration provides basic automations to get started with gitStream.
 # View the gitStream quickstart for more examples: https://docs.gitstream.cm/examples/
+#
+# GitStream Control Tags:
+# - Add [gitstream_on] to PR description to enable automatic AI review and description on PR creation
+# - Add [gitstream_review] to PR description to request AI review on next commit
+# - Add [gitstream_describe] to PR description to request AI description update on next commit
+#
+# This prevents gitstream from spamming PRs with comments on every commit while still allowing
+# users to control when they want AI assistance.
+
 manifest:
   version: 1.0
 
@@ -10,11 +19,11 @@ automations:
   linearb_ai_review:
     on:
       - pr_created
-      - commit
     if:
       - {{ not pr.draft }}
       - {{ not is.bot }}
       - {{ has.gitstream_on }}
+      - {{ not has.gitstream_reviewed }}
     run:
       - action: code-review@v1
         args:
@@ -24,11 +33,39 @@ automations:
   linearb_ai_description:
     on:
       - pr_created
-      - commit
     if:
       - {{ not pr.draft }}
       - {{ not is.bot }}
       - {{ has.gitstream_on }}
+      - {{ not has.gitstream_described }}
+    run:
+      - action: describe-changes@v1
+        args:
+          concat_mode: append
+
+  # Manual trigger for AI review on existing PRs
+  manual_ai_review:
+    on:
+      - commit
+    if:
+      - {{ not pr.draft }}
+      - {{ not is.bot }}
+      - {{ has.gitstream_review_requested }}
+      - {{ not has.gitstream_reviewed_in_last_commits }}
+    run:
+      - action: code-review@v1
+        args:
+          approve_on_LGTM: {{ calc.safe_changes }}
+
+  # Manual trigger for AI description on existing PRs
+  manual_ai_description:
+    on:
+      - commit
+    if:
+      - {{ not pr.draft }}
+      - {{ not is.bot }}
+      - {{ has.gitstream_description_requested }}
+      - {{ not has.gitstream_described_in_last_commits }}
     run:
       - action: describe-changes@v1
         args:
@@ -72,6 +109,12 @@ has:
   jira_ticket_in_title: {{ pr.title | includes(regex=r/\b[A-Za-z]+-\d+\b/) }}
   jira_ticket_in_desc: {{ pr.description | includes(regex=r/atlassian.net\/browse\/\w{1,}-\d{3,4}/) }}
   gitstream_on: {{ pr.description | includes('[gitstream_on]') }}
+  gitstream_review_requested: {{ pr.description | includes('[gitstream_review]') }}
+  gitstream_description_requested: {{ pr.description | includes('[gitstream_describe]') }}
+  gitstream_reviewed: {{ pr.comments | match(attr='author', list=['github-actions', 'linearb-ai']) | some }}
+  gitstream_described: {{ pr.description | includes('AI Generated Description') or pr.description | includes('<!-- AI DESCRIPTION -->') }}
+  gitstream_reviewed_in_last_commits: {{ pr.comments | filter(attr='created_at', regex=r/{{ branch.base.sha | slice(0, 7) }}/) | match(attr='author', list=['github-actions', 'linearb-ai']) | some }}
+  gitstream_described_in_last_commits: {{ pr.timeline | filter(attr='event_type', list=['description_changed']) | filter(attr='created_at', regex=r/{{ branch.base.sha | slice(0, 7) }}/) | some }}
 
 colors:
   red: 'b60205'
