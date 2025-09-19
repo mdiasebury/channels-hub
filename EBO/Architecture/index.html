@@ -1,0 +1,1123 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://channels.readthedocs.io/EBO/Architecture/">
+      
+      
+        <link rel="prev" href="../EBO/">
+      
+      
+        <link rel="next" href="../../Mobile/Mobile/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Architecture - Channels Hub</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="light-blue" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#architecture-of-eburyonline" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Channels Hub" class="md-header__button md-logo" aria-label="Channels Hub" data-md-component="logo">
+      
+  <img src="../../assets/CHANNELS.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Channels Hub
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="light-blue" data-md-color-accent="deep-purple"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="deep-orange"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../API/API/" class="md-tabs__link">
+          
+  
+  
+  API
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../EBO/" class="md-tabs__link">
+          
+  
+  
+  EBO
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Mobile/Mobile/" class="md-tabs__link">
+          
+  
+  
+  Mobile
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Channels Hub" class="md-nav__button md-logo" aria-label="Channels Hub" data-md-component="logo">
+      
+  <img src="../../assets/CHANNELS.png" alt="logo">
+
+    </a>
+    Channels Hub
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../API/API/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../API/api-endpoints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Endpoints
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../API/api-auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Authentication
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    EBO
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            EBO
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EBO/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Server
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      MVC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-consistency" class="md-nav__link">
+    <span class="md-ellipsis">
+      API consistency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error handling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Endpoints
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Browser
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backends-internal-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backends (internal systems)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Infrastructure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudfront-and-s3" class="md-nav__link">
+    <span class="md-ellipsis">
+      CloudFront and S3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#web-application-firewall-waf" class="md-nav__link">
+    <span class="md-ellipsis">
+      Web Application Firewall (WAF)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3rd-party" class="md-nav__link">
+    <span class="md-ellipsis">
+      3rd party
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-and-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoring and metrics
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mobile
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Mobile
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mobile/Mobile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Server
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      MVC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-consistency" class="md-nav__link">
+    <span class="md-ellipsis">
+      API consistency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error handling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Endpoints
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Browser
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backends-internal-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backends (internal systems)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Infrastructure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudfront-and-s3" class="md-nav__link">
+    <span class="md-ellipsis">
+      CloudFront and S3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#web-application-firewall-waf" class="md-nav__link">
+    <span class="md-ellipsis">
+      Web Application Firewall (WAF)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3rd-party" class="md-nav__link">
+    <span class="md-ellipsis">
+      3rd party
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-and-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoring and metrics
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="architecture-of-eburyonline">Architecture of Eburyonline <!-- omit in toc --></h1>
+<ol>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#server">Server</a></li>
+<li><a href="#mvc">MVC</a></li>
+<li><a href="#api-consistency">API consistency</a></li>
+<li><a href="#error-handling">Error handling</a></li>
+<li><a href="#endpoints">Endpoints</a></li>
+<li><a href="#browser">Browser</a></li>
+<li><a href="#backends-internal-systems">Backends (internal systems)</a></li>
+<li><a href="#infrastructure">Infrastructure</a></li>
+<li><a href="#cloudfront-and-s3">CloudFront and S3</a></li>
+<li><a href="#web-application-firewall-waf">Web Application Firewall (WAF)</a></li>
+<li><a href="#3rd-party">3rd party</a></li>
+<li><a href="#monitoring-and-metrics">Monitoring and metrics</a></li>
+</ol>
+<h2 id="overview">Overview</h2>
+<p><img alt="Architecture diagram" src="./images/architecture.png" /></p>
+<h2 id="server">Server</h2>
+<p>The server runs <a href="https://www.djangoproject.com/">Django 4.2</a> using an MVC design pattern. EBO has its own Postgres DB and Redis for caching data and storing user sessions.</p>
+<p>The legacy code uses Django templates to generate HTML code, while the modern stack uses Django only as a REST API and the HTML is part of the SPA client written using <a href="https://vuejs.org/guide/introduction.html">Vue.js</a>.</p>
+<p>The API is stateful for legacy and the modern stack, which means there is a user session stored on the server side. The development team treats this session only as a user-level cache for the important stuff. The session can be lost at any time and everything must be recoverable from external backend services or a database. Thus no load balancing based on cookies or any session locking is needed when serving parallel requests from one user. If a state is required (e.g. for persisting wizard forms), the state must be either held on the client side (using SPA) or persisted in a temporary table in the DB.</p>
+<h3 id="mvc">MVC</h3>
+<p>Every API endpoint should follow the MVC pattern.</p>
+<p>A view should extract the data from the request, then ask the controller to get or update the given data, and then the view should produce an HTTP response based on the requested format. It could be JSON, XML, PDF, CSV, HTML, etc.</p>
+<p>Meanwhile, the controller should be responsible for validating the inputs coming from the requests and then retrieving the data from multiple backends or updating data in those backends.</p>
+<p>Backends (e.g. <code>backends/bos/</code> or <code>backends/salesforce</code>) are just simple, context free, service clients in order to call endpoints of the backend. There should be no logic in these clients, they should not have any dependencies so everyone can call them from any place without creating circular imports. If any logic is required, the controller is the right place to do so.</p>
+<h3 id="api-consistency">API consistency</h3>
+<p>The API should not format data like dates, addresses, or amounts, or translate texts. Data should always be returned raw and let the frontend format them as they want. This offers flexibility for our designers to adjust texts in the UI without modifying/deploying the server side. The only acceptable format for dates is the ISO 8601 standard. I18n and l10n have more detailed documentation available: <a href="./DATES_AND_TIME_ZONES.md">Dates and Time Zones</a> and <a href="./TRANSLATIONS.md">Translations</a>.</p>
+<p>The UI must not be aware of what service is called under the hood and maintain a consistent API schema and error handling. Examples of inconsistencies from the past that must be avoided:</p>
+<ul>
+<li>The service A communicates errors via HTTP status codes (400, 404) and detailed error description in the JSON object, meanwhile the service B returns 200 all the time and the error status code is in the JSON body.</li>
+<li>The service A returns all boolean values using <code>True</code>/<code>False</code> values, the service B uses numerical <code>0</code>/<code>1</code></li>
+<li>The service A returns dates in ISO format (<code>2022-01-01</code>), the service B made up its own (<code>01012022</code>)</li>
+<li>The service A returns numbers in plain format (<code>1234.56</code>), the service B preformattes them (<code>"1,234.56"</code>)</li>
+</ul>
+<p>The discrepancies must be eliminated on the service layer (or in service client if agreed) but never in UI.</p>
+<h3 id="error-handling">Error handling</h3>
+<p>To keep the code easy to understand, it should only contain a happy path. If an error is encountered, the code should always raise an exception and let the global error handlers to handle the exception. That means no silly error propagation throughout the code using error codes, <code>True/False</code> or <code>None</code> to indicate a call ended with an error. This adds lots of unnecessary logic into the code and makes the code cluttered with things that are not important. Raising the exception is the preferred way. The code should only catch these exceptions if there is a way to recover from it.</p>
+<h3 id="endpoints">Endpoints</h3>
+<p>To define the endpoints contract we use <a href="OPENAPI.md">OpenAPI</a>.</p>
+<p>Every API endpoint should use an URL that points to a resource (URL stands for Uniform <strong>Resource</strong> Locator). Thus all URLs must use only nouns, not the verbs (e.g. <code>POST /api/trade/update/</code> should be <code>PUT /api/trades/</code>; or <code>POST /api/payment/{id}/authorise/</code> should be <code>POST /api/payments/{id}/authorisations/</code>).</p>
+<p>In order to identify issues with the server and raise alerts, the endpoints must return correct <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">status codes</a>. Using only <code>200</code> with the status code buried in the JSON body is strictly prohibited. Some HTTP status codes (e.g. <code>400</code>, <code>422</code>) may return additional error code in the body that helps the UI to better describe the cause of the error and display a proper message.</p>
+<p>Every <code>5XX</code> error is automatically reported to Sentry and an alert is risen to the ONL team, so the endpoint should never raise those errors intentionally. <code>4XX</code> status codes must be used to indicate errors that are expected and user can recover from them.</p>
+<p>To improve performance, endpoints should cache the output if it's possible using <code>Cache-Control</code> headers. The endpoint can cache the response globally for all users, or per user, or per language (using additional <code>Vary: Cookie</code> or <code>Vary: Accept-Language</code> header).</p>
+<h2 id="browser">Browser</h2>
+<p>Legacy code is generated on the server side using Django's templating engine and then the UX is enhanced using jQuery 3 and Backbone with Marionette views. The legacy code is deprecated and only bugs should be fixed there.</p>
+<p>Then there is a Vue.js SPA code which also has a legacy part and the modern part (they're located in <code>frontend_legacy</code> (Vue 2) and <code>frontend</code> (Vue 3) folders). All new features in EBO must be developed in the modern SPA, if there is a need for new features in the legacy part, it should get migrated first to the modern stack.</p>
+<p>The modern stack uses a <a href="https://vuejs.org/guide/essentials/component-basics.html">components architecture</a> with strict separation of concerns and presentation logic. Every component must be testable and tested in unit tests and/or in integration tests. Each component style must follow BEM methodology, while the application styles follow the <a href="https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/">ITCSS</a> architecture on top of that. We built our own components library that adheres to these rules, you can find the <a href="https://github.com/Ebury/chameleon">modern version</a> and the <a href="https://github.com/Ebury/ebury-chameleon">legacy version</a> in GitHub.</p>
+<p>The SPA uses a <a href="https://pinia.vuejs.org/">state management</a> pattern to store the state of components on the client side (just like <a href="https://docs.djangoproject.com/en/4.2/topics/http/sessions/">Django's session</a> does the same on the server side). The app, in order to be SPA, also includes <a href="https://router.vuejs.org/">routing</a> (just like <a href="https://docs.djangoproject.com/en/4.2/topics/http/urls/">Django's URLs</a>).</p>
+<p>CSS evolved over time from using <a href="https://lesscss.org/">LESS</a> to <a href="https://sass-lang.com/">SASS</a> to <a href="https://postcss.org/">PostCSS</a> with <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">CSS variables</a>, you can find all of them still being used in the project. The modern stack must only use PostCSS with CSS variables in order to scale our branding solution. In addition, we use <a href="https://tailwindcss.com/">Tailwind CSS</a> for better DXP and very needed consistency of our CSS styles.</p>
+<p>Everything is bundled together using <a href="https://webpack.js.org/concepts/">webpack 5</a> (wrapped by <a href="https://cli.vuejs.org/">Vue CLI 5</a>) using modern principles like <a href="https://v4.webpack.js.org/guides/tree-shaking/">three shaking</a> and <a href="https://v2.vuejs.org/v2/guide/components-dynamic-async.html?redirect=true#Async-Components">dynamic imports</a> to minimise the size of the final bundle. The legacy Vue code uses <a href="https://v4.webpack.js.org/concepts/">webpack 4</a> (wrapped by <a href="https://cli.vuejs.org/">Vue CLI 4</a>); and the legacy core, written before the webpack era, uses <a href="https://gulpjs.com/">Gulp 4</a>.</p>
+<p>The weakest point of the legacy code is lack of testing. The spaghetti code is not testable at all and the development requires lots of manual tests to be performed before going live. Some scenarios are covered by the <a href="https://github.com/Ebury/cell-eburyautomation">E2E tests</a> but mainly critical happy paths in the legacy.</p>
+<p>We set a high priority for testing everything properly in the modern stack. The components architecture allows us to test every component individually in unit tests using <a href="https://jestjs.io/">Jest</a> and then test all components together in integration tests (<a href="https://www.cypress.io/">Cypress</a>) covering all edge cases. We test the code to have a full confidence when shipping the code and making changes in the code.</p>
+<p>For more detailed documentation about our modern UI stack check out the <a href="./FRONTEND.md">Frontend guide</a>.</p>
+<h2 id="backends-internal-systems">Backends (internal systems)</h2>
+<p>EBO doesn't own any domain data, but rather retrieves data from backends behind the EBO (e.g. Ebury's <code>natonly</code>, <code>backoffice</code> clusters or from Salesforce servers). Here are the list of all direct backends and domains they cover for EBO views:</p>
+<ul>
+<li><a href="https://github.com/Ebury/bos">BOS</a>: payments, deals, trades, funds, clients, contacts, beneficiaries, fees, statements</li>
+<li><a href="https://github.com/Ebury/fxsuite">FXS</a>: rates, currencies</li>
+<li><a href="https://github.com/Ebury/sfdx">Salesforce</a>: trade finance, suppliers</li>
+<li><a href="https://github.com/Ebury/verify">Verify</a>: 2FA (login and payments)</li>
+<li><a href="https://github.com/Ebury/ebury-api-webapp">Ebury API</a>: account details</li>
+<li><a href="https://github.com/Ebury/ebury-services/tree/main/services/beneficiary-query-service">Beneficiary Query Service</a>: beneficiaries</li>
+<li><a href="https://github.com/Ebury/payment-query-service">Payment Query Service</a>: payments delivery</li>
+<li><a href="https://github.com/Ebury/documents-service/">Document Service</a>: document uploads</li>
+<li><a href="https://github.com/Ebury/ebury-token-io-service">token.io Service</a>: payment initiation</li>
+<li><a href="https://github.com/Ebury/bexs-gateway">BEXS Gateway</a>: payments, trades (Brazil)</li>
+<li><a href="https://github.com/Ebury/the-bavs">The BAVS</a>: bank accounts validations</li>
+</ul>
+<p>The list above only covers direct dependencies of the EBO, there may be more indirect services that are involved when processing requests from EBO, e.g.</p>
+<ul>
+<li><a href="https://github.com/Ebury/account-details-service">Account Details Service</a> (accessed via Ebury API)</li>
+<li><a href="https://github.com/Ebury/smart-date">Smart Date Service</a> (accessed via BOS)</li>
+<li><a href="https://github.com/Ebury/fee-tier-service">Fee Tier Service</a> (accessed via BOS)</li>
+</ul>
+<h2 id="infrastructure">Infrastructure</h2>
+<p>EBO runs as a ReplicaSet in <a href="https://kubernetes.io/">K8s</a>, inside of the <code>backoffice</code> cluster. The deployment uses 2 pods, the number of them is auto scaled (e.g. 3 to 9 pods in prod, 2 to 6 in staging). A full configuration of EBO can be found in <a href="https://github.com/Ebury/ebury-manifests/tree/master/k8s-environments">ebury-manifests</a> repo, in the <code>online</code> folders.</p>
+<p>On top of that, there's a full set of AWS components spawned inside <code>publicfrontal</code> cluster that opens EBO to public and protects EBO from public, e.g Route 53, ALB, S3 buckets, WAF and Cloudfront CDN. The database and redis are also deployed inside this cluster and EBO connects to them from the <code>backoffice</code> cluster. A full configuration of EBO in ECS can be found in <a href="https://github.com/Ebury/terraform-publicfrontal/blob/develop/src/app_ebo.tf">publicfrontal cluster</a> repo.</p>
+<h2 id="cloudfront-and-s3">CloudFront and S3</h2>
+<p>When deployed to production in AWS, EBO has a caching layer in front of its servers - <a href="https://aws.amazon.com/cloudfront/">CloudFront</a>, which serves as a CDN to distribute static content to our clients across Europe, Canada and Australia. The content, generated by webpack/gulp, is built during the release and then stored in S3 which is used by the CF as a content origin. The static content in S3 contains JS, CSS, image files built by the legacy core and Vue.js apps. On top of that, CloudFront caches every response from EBO's REST API if the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control">Cache-Control</a> header is present in the HTTP response.</p>
+<p>The CloudFront is managed automatically via Terraform and the configuration for EBO can be found in the <a href="https://github.com/Ebury/terraform-publicfrontal/blob/develop/src/locals.tf#L277">publicfrontal cluster</a> repo.</p>
+<h2 id="web-application-firewall-waf">Web Application Firewall (WAF)</h2>
+<p>Similarly to CloudFront, <a href="https://aws.amazon.com/waf/">WAF</a> is yet another layer in front of CloudFront and EBO. It protects the entire stack from automated attacks, restricting the access based on the rate limiter and blocks malicious requests using predefined set of rules. If a request doesn't pass the checks, a 403 response is returned to the client and the request is not forwarded to the CF.</p>
+<p>The full configuration of the firewall can be found in <a href="https://github.com/Ebury/terraform-publicfrontal/blob/develop/src/locals.tf#L295">publicfrontal cluster</a> repo.</p>
+<p>All blocked or allowed requests are in the logs for WAF in <a href="https://kibana6.ebury.rocks/_plugin/kibana/app/kibana#/discover?_g=(refreshInterval:(pause:!f,value:60000),time:(from:now-24h,mode:quick,to:now))&amp;_a=(columns:!(action,httpRequest.clientIp,httpRequest.httpMethod,httpRequest.uri),index:" title="3923d2c0-cac1-11eb-943d-8f4c68701928',interval:auto,query:(language:lucene,query:'">Kibana</a>,sort:!(timestamp,desc),viewMode:view)).</p>
+<h2 id="3rd-party">3rd party</h2>
+<p>EBO relies on a few 3rd party services outside of Ebury:</p>
+<ul>
+<li><a href="https://sentry.io/organizations/eburytech/issues/?project=1510303">Sentry</a>: To log and alert issues from client and server side.</li>
+<li><a href="https://analytics.google.com/analytics/web/#/report-home/a15157589w80206421p86763122">Google Analytics</a>: To collect events for our UX Team</li>
+<li><a href="https://app.segment.com/ebo/overview">Segment</a>: To collect events for our Data Team</li>
+<li><a href="https://www.intercom.com/">Intercom</a>: To provide support for the clients</li>
+<li><a href="https://www.inspectlet.com/">Inspectlet</a>: To record sessions needed for debugging client issues</li>
+<li><a href="https://scanii.com/">Scanii</a>: To scan uploaded files</li>
+</ul>
+<p>All 3rd party services are configured the way that EBO must continue working if they are down. We can remove any of these services from EBO just by flipping <a href="https://waffle.readthedocs.io/en/stable/types/index.html">switches/flags</a> in our DB.</p>
+<h2 id="monitoring-and-metrics">Monitoring and metrics</h2>
+<p>Check out the <a href="./MONITORING.md">Monitoring</a> and <a href="./METRICS.md">Metrics</a> guides.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
